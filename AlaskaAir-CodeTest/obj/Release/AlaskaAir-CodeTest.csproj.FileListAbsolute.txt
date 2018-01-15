@@ -73,3 +73,4 @@ C:\aws\beanstock\AlaskaAir-CodeTest\AlaskaAir-CodeTest\bin\Microsoft.Owin.Securi
 C:\aws\beanstock\AlaskaAir-CodeTest\AlaskaAir-CodeTest\obj\Release\AlaskaAir-CodeTest.dll
 C:\aws\beanstock\AlaskaAir-CodeTest\AlaskaAir-CodeTest\obj\Release\AlaskaAir-CodeTest.pdb
 C:\aws\beanstock\AlaskaAir-CodeTest\AlaskaAir-CodeTest\obj\Release\AlaskaAir-CodeTest.csprojResolveAssemblyReference.cache
+C:\aws\beanstock\AlaskaAir-CodeTest\AlaskaAir-CodeTest\bin\Elmah.dll

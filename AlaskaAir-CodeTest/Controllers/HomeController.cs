@@ -27,13 +27,19 @@ namespace AlaskaAir_CodeTest.Controllers
                 Total = 1,
                 Results = sel_o
             };
-
-            if (ca_o != null)
+            try
             {
-                Airports[] all_airports = (Airports[])ca_o;
+                if (ca_o != null)
+                {
+                    Airports[] all_airports = (Airports[])ca_o;
 
-                aps_o.Results = sg.Airports(searchTerm, all_airports);
+                    aps_o.Results = sg.Airports(searchTerm, all_airports);
+                }
+            } catch (Exception ex)
+            {
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex); 
             }
+            
 
             return new JsonResult
             {
@@ -63,7 +69,7 @@ namespace AlaskaAir_CodeTest.Controllers
 
                 } catch (Exception ex)
                 {
-                    
+                    Elmah.ErrorSignal.FromCurrentContext().Raise(ex); 
                 }
                 
             }
@@ -96,7 +102,7 @@ namespace AlaskaAir_CodeTest.Controllers
 
             } catch (Exception ex)
             {
-
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex); 
             }
 
             return new JsonResult
