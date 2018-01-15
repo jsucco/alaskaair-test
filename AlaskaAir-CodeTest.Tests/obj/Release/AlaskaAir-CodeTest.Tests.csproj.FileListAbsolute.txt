@@ -1,0 +1,1 @@
+C:\aws\beanstock\AlaskaAir-CodeTest\AlaskaAir-CodeTest.Tests\obj\Release\AlaskaAir-CodeTest.Tests.csprojResolveAssemblyReference.cache

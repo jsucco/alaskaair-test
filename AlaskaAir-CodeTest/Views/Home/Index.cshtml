@@ -1,0 +1,226 @@
+﻿@{
+    ViewBag.Title = "Flight Search";
+}
+
+<head>
+    <link type="text/css" rel="stylesheet" href="~/Content/select2.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/pagination.css"/>
+    <link type="text/css" rel="stylesheet" href="~/Content/SearchGrid.css" />
+</head>
+
+<div class="jumbotron" style="overflow-y:auto !important;">
+    <h3>Search Flights Between Airports</h3>
+    <div class="col-md-4" style="width: 37.33%  !important;">
+        <label for="airport_1">From:</label>
+        <input id="airport1" class="airport-search" type="text" style="outline:none; height: 65px;"/>
+    </div>
+    <div class="col-md-4" style="width: 37.33%  !important;">
+        <label for="airport2">To:</label>
+        <input id="airport2" class="airport-search" type="text" style="outline:none; height:65px;" />
+    </div>
+</div>
+
+<div class="row">
+    <div id="results_wrapper">
+        <selction>
+            <div class="grid-header">
+                <div class="header-container">
+                    
+                    <div class="header-child-right header-text">Main Cabin Price</div>
+                    <div class="header-child-right header-text">First Class Price</div>
+                    <div class="header-child-right sort-container">
+                        <label for="grid_sort">Sort:</label>
+                        <select id="grid_sort" style="height: 33px;">
+                            <option selected>none</option>
+                            <option value="maincabin_asc">Main Cabin Price (low to high)</option>
+                            <option value="maincabin_dsc">Main Cabin Price (high to low)</option>
+                            <option value="firstclass__asc">First Class Price (low to high)</option>
+                            <option value="firstclass__dsc">First Class Price (high to to)</option>
+                            <option value="departs_asc">Departure (early to late)</option>
+                            <option value="departs_dsc">Departure (late to early)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </selction>
+        <section>
+            <div id="container" class="data-container"></div>
+            <div id="pager"></div>
+        </section>
+    </div>
+</div>
+<div id="loader_container" style="display:none;" class="row">
+    <div><img class="loader" src="~/Content/images/ajax-loader.gif"/></div>
+</div>
+
+<script type="text/javascript" src="~/Scripts/select2.js"></script>
+<script type="text/javascript" src="~/Scripts/pagination.min.js"></script>
+<script type="text/javascript">
+
+    var pageSize = 100;
+    var loader = $("#loader_container"); 
+
+    $(function () {
+        grid.Init([]);
+        search.Init(); 
+
+        $('.airport-search').change(function (e) {
+
+            var id = $(this).attr('id');
+            var from = search.airport1.val(), to = search.airport2.val();
+
+            if (from == null || to == null)
+                return; 
+
+            if (from.length > 0 && from == to) {
+                alert("selection must be two different airports");
+                return; 
+            }
+
+            if (from.length > 0 && to.length > 0) {
+                grid.pagerContainer.pagination('destroy');
+                grid.dataContainer.html('');
+                loader.toggle(); 
+                controller.getFlights(from, to);
+            }
+
+            if (from.length == 0 || to.length == 0) {
+                grid.pagerContainer.pagination('destroy');
+                grid.dataContainer.html('');
+                grid.Init([])
+            }
+
+        });
+
+        $("#grid_sort").change(function (e) {
+            var val = $(this).val();
+
+            if (val.length > 0) {
+                grid.pagerContainer.pagination('destroy');
+                grid.dataContainer.html('');
+                loader.toggle(); 
+                controller.sortFlights(val);
+            }
+               
+        });
+    });
+
+    var controller = {
+        getFlights: function (ap1, ap2) {
+            $.ajax({
+                url: '@Url.Action("GetFlights", "Home")',
+                type: "GET",
+                data: { airport1: ap1, airport2: ap2 },
+                success: function (result, status, xhr) {
+                    console.log(result);
+                    loader.toggle(); 
+                    if (result != null && result.length > 0) {                      
+                        grid.Init(result); 
+                    } else {
+                        grid.Init([]); 
+                    }
+                }
+            })
+        },
+        sortFlights: function (opp) {
+            $.ajax({
+                url: '@Url.Action("SortFlights", "Home")',
+                type: "GET",
+                data: { oper: opp },
+                success: function (result, status, xhr) {
+                    console.log(result);
+                    loader.toggle(); 
+                    if (result != null && result.length > 0) {
+                        
+                        grid.Init(result); 
+                    } else {
+                        grid.Init([]);
+                    }
+                }
+            })
+        }
+    };
+
+    var grid = {
+        pagerContainer: $("#pager"),
+        dataContainer: $("#container"),
+        template: function (data) {
+            var dataHtml = '<ul>';
+            $.each(data, function (index, item) {
+                dataHtml += '<li>' + item + '</li>';
+            });
+            dataHtml += '</ul>';
+
+            return dataHtml;
+        },
+        templateProd: function (data) { 
+            var dataHtml = '<ul>';
+
+            if (data == null || data.length == 0) {
+                dataHtml += '<li></li>'
+            } else {
+                $.each(data, function (index, item) {
+                    var dep_d = new Date(parseInt(item.Departs.substr(6)));
+                    var arr_d = new Date(parseInt(item.Arrives.substr(6)));
+
+                    dataHtml += '<li><div class="results-container"><div class="flight-num results-child">FLIGHT NUMBER<br><br>' + item.FlightNumber +
+                                '</div><div class="departs results-child">DEPARTS: ' + item.From +
+                                '<br><br>' + dep_d.toLocaleTimeString() + '</div><div class="arrives results-child">ARRIVES: ' + item.To +
+                                '<br><br>' + arr_d.toLocaleTimeString() + '</div><div class="main-price results-child-right">&nbsp;&nbsp;&nbsp$' + item.MainCabinPrice +
+                                '</div><div class="first-price results-child-right">&nbsp;&nbsp;&nbsp$' + item.FirstClassPrice + '</div></div></li>';
+                });
+            }         
+            dataHtml += '</ul>';
+
+            return dataHtml;
+        },
+        Init: function (data) {
+
+            if (data == null)
+                data = []; 
+
+            grid.pagerContainer.pagination({
+                dataSource: data,
+                callback: function (data, pagination) {
+                    // template method of yourself
+                    var html = grid.templateProd(data);
+
+                    console.log("html", html);
+
+                    grid.dataContainer.html(html);
+                }
+            })
+        }
+    }
+
+    var search = {
+        airport1: $("#airport1"),
+        airport2: $("#airport2"),
+        Init: function () {
+            $(".airport-search").select2({
+                width: '100%',
+                multiple: true,
+                allowClear: true,
+                maximumSelectionSize: 1,
+                placeholder: "Airport",
+                ajax: {
+                    quietMillis: 150,
+                    url: '@Url.Action("AirportSearch", "Home")',
+                    dataType: 'json',
+                    data: function (term, page) {
+                        return {
+                            pageSize: pageSize,
+                            pageNum: page,
+                            searchTerm: term
+                        };
+                    },
+                    results: function (data, page) {
+                        var more = (page * pageSize) < data.Total;
+
+                        return { results: data.Results, more: more }
+                    }
+                }
+            });
+        }
+    }
+</script>

@@ -1,0 +1,67 @@
+﻿.data-container li {
+    background: #EEE;
+    margin-bottom: 3px;
+    padding: 8px;
+    line-height: 1em;
+    list-style: none;
+}
+
+.results-container { 
+    background-color: transparent; 
+    overflow-y:hidden; 
+    max-height: 120px;
+}
+
+.results-child { 
+    overflow: hidden; 
+    width: 150px;
+    height: 100px;
+    float: left;
+    margin: 1em;
+}
+
+.results-child-right { 
+    overflow: hidden; 
+    width: 150px;
+    height: 100px;
+    float: right;
+    margin: 1em;
+}
+
+.grid-header { 
+    height: 50px;
+}
+
+.header-container { 
+    background-color: transparent; 
+    overflow-y:hidden; 
+    max-height: 45px;
+}
+
+.header-child-right { 
+    overflow: hidden;
+    width: 150px;
+    height: 40px;
+    float: right;
+    margin: 1em;
+    
+}
+
+.header-text { 
+    font-size: 16px;
+    font-weight: 700;
+    color: #2357a6;
+    text-decoration: underline;
+}
+
+.sort-container { 
+    width:320px; position:relative; top:-7px;
+}
+
+.loader { 
+    display: block;
+    height: 25px;
+    position: relative;
+    top: -40px;
+    margin:auto; 
+}
