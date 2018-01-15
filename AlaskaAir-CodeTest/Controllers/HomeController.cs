@@ -145,7 +145,10 @@ namespace AlaskaAir_CodeTest.Controllers
                         break;
                     case "departs_dsc":
                         sorted = Services.SortFlights.DepartDsc(fs);
-                        break;                      
+                        break;
+                    default:
+                        sorted = fs;
+                        break;                 
                 }
             }
             return sorted; 
