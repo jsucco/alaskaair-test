@@ -9,6 +9,8 @@ namespace AlaskaAir_CodeTest.Models
         public int FlightNumber { get; set; }
         public DateTime Departs { get; set; }
         public DateTime Arrives { get; set; }
+        public string DepartStr { get; set; }
+        public string ArriveStr { get; set; }
         public decimal MainCabinPrice { get; set; }
         public decimal FirstClassPrice { get; set; }
     }

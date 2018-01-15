@@ -4,6 +4,8 @@
     padding: 8px;
     line-height: 1em;
     list-style: none;
+    box-shadow: 0px 2px 3px #6a6d6f;
+    border-radius: 2px;
 }
 
 .results-container { 
@@ -64,4 +66,8 @@
     position: relative;
     top: -40px;
     margin:auto; 
+}
+
+.data-text { 
+    font-weight: 600;
 }

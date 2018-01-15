@@ -161,14 +161,12 @@
                 dataHtml += '<li></li>'
             } else {
                 $.each(data, function (index, item) {
-                    var dep_d = new Date(parseInt(item.Departs.substr(6)));
-                    var arr_d = new Date(parseInt(item.Arrives.substr(6)));
 
-                    dataHtml += '<li><div class="results-container"><div class="flight-num results-child">FLIGHT NUMBER<br><br>' + item.FlightNumber +
-                                '</div><div class="departs results-child">DEPARTS: ' + item.From +
-                                '<br><br>' + dep_d.toLocaleTimeString() + '</div><div class="arrives results-child">ARRIVES: ' + item.To +
-                                '<br><br>' + arr_d.toLocaleTimeString() + '</div><div class="main-price results-child-right">&nbsp;&nbsp;&nbsp$' + item.MainCabinPrice +
-                                '</div><div class="first-price results-child-right">&nbsp;&nbsp;&nbsp$' + item.FirstClassPrice + '</div></div></li>';
+                    dataHtml += '<li><div class="results-container"><div class="flight-num results-child data-text">FLIGHT NUMBER<br><br>' + item.FlightNumber +
+                                '</div><div class="departs results-child data-text">DEPARTS: ' + item.From +
+                                '<br><br>' + item.DepartStr + '</div><div class="arrives results-child data-text">ARRIVES: ' + item.To +
+                                '<br><br>' + item.ArriveStr + '</div><div class="main-price results-child-right data-text">&nbsp;&nbsp;&nbsp$' + item.MainCabinPrice +
+                                '</div><div class="first-price results-child-right data-text">&nbsp;&nbsp;&nbsp$' + item.FirstClassPrice + '</div></div></li>';
                 });
             }         
             dataHtml += '</ul>';

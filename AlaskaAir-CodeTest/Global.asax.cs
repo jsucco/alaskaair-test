@@ -21,6 +21,12 @@ namespace AlaskaAir_CodeTest
             FileConfig.CacheAppData(); 
         }
 
+        protected void Session_Start()
+        {
+            //need static sessionid for cache
+            Session["SessionID"] = HttpContext.Current.Session.SessionID;
+        }
+
         protected void Application_BeginRequest()
         {
             VarifyCacheObjects(); 

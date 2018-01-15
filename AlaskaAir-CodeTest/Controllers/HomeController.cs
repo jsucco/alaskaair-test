@@ -63,9 +63,9 @@ namespace AlaskaAir_CodeTest.Controllers
 
                     results = s.FlightsByRoute(flights, airport1, airport2);
 
-                    string sessionId = HttpContext.Session.SessionID;
+                    var sessionId = Session["SessionID"];
 
-                    CacheContextResults(sessionId, results); 
+                    CacheContextResults(sessionId.ToString(), results); 
 
                 } catch (Exception ex)
                 {
@@ -89,8 +89,8 @@ namespace AlaskaAir_CodeTest.Controllers
 
             try
             {
-                var sessionId = HttpContext.Session.SessionID;
-                var cache_src = HttpRuntime.Cache["user-results-"];
+                var sessionId = Session["SessionID"];
+                var cache_src = HttpRuntime.Cache["user-results-" + sessionId.ToString().Substring(0, 4)];
 
                 if (cache_src != null)
                 {
@@ -117,7 +117,7 @@ namespace AlaskaAir_CodeTest.Controllers
         private void CacheContextResults(string SessionId, Flights[] results) 
         {
             if (results.Length > 0) {
-                HttpRuntime.Cache.Insert("user-results-",
+                HttpRuntime.Cache.Insert("user-results-" + SessionId.Substring(0, 4),
                     results,
                     null,
                     DateTime.Now.AddDays(2),

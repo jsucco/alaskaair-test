@@ -63,8 +63,10 @@ namespace AlaskaAir_CodeTest.Services
                     From = col_data[0],
                     To = col_data[1],
                     FlightNumber = ToInt32(col_data[2]),
-                    Departs = ToDateTime(col_data[3]), 
-                    Arrives = ToDateTime(col_data[4]), 
+                    Departs = ToDateTime(col_data[3]),
+                    Arrives = ToDateTime(col_data[4]),
+                    DepartStr = ToDateTime(col_data[3]).ToString("t"),
+                    ArriveStr = ToDateTime(col_data[4]).ToString("t"),
                     MainCabinPrice = ToDecimal(col_data[5]), 
                     FirstClassPrice = ToDecimal(col_data[6]),
                 };

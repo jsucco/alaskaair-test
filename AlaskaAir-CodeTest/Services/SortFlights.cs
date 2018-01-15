@@ -28,12 +28,12 @@ namespace AlaskaAir_CodeTest.Services
 
         public static Flights[] DepartAsc(Flights[] src)
         {
-            return src.OrderBy(c => c.Departs).ToArray(); 
+            return src.OrderBy(c => c.Departs.TimeOfDay).ToArray(); 
         }
 
         public static Flights[] DepartDsc(Flights[] src)
         {
-            return src.OrderByDescending(c => c.Departs).ToArray(); 
+            return src.OrderByDescending(c => c.Departs.TimeOfDay).ToArray(); 
         }
     }
 }
