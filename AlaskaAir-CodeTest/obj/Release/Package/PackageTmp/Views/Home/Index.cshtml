@@ -95,10 +95,7 @@
         $("#grid_sort").change(function (e) {
             var val = $(this).val();
 
-            if (val.length > 0) {
-                grid.pagerContainer.pagination('destroy');
-                grid.dataContainer.html('');
-                loader.toggle(); 
+            if (val.length > 0) {               
                 controller.sortFlights(val);
             }
                
@@ -129,15 +126,19 @@
                 data: { oper: opp },
                 success: function (result, status, xhr) {
                     console.log(result);
-                    loader.toggle(); 
+                    
                     if (result != null && result.length > 0) {
+                        grid.pagerContainer.pagination('destroy');
+                        grid.dataContainer.html('');
+                        loader.toggle();
+                        setTimeout(function () {
+                            grid.Init(result);
+                            loader.toggle();
+                        }, 150);
                         
-                        grid.Init(result); 
-                    } else {
-                        grid.Init([]);
                     }
                 }
-            })
+            });
         }
     };
 

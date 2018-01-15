@@ -90,7 +90,7 @@ namespace AlaskaAir_CodeTest.Controllers
             try
             {
                 var sessionId = HttpContext.Session.SessionID;
-                var cache_src = HttpRuntime.Cache["user-results-" + sessionId];
+                var cache_src = HttpRuntime.Cache["user-results-"];
 
                 if (cache_src != null)
                 {
@@ -117,10 +117,10 @@ namespace AlaskaAir_CodeTest.Controllers
         private void CacheContextResults(string SessionId, Flights[] results) 
         {
             if (results.Length > 0) {
-                HttpRuntime.Cache.Insert("user-results-" + SessionId,
+                HttpRuntime.Cache.Insert("user-results-",
                     results,
                     null,
-                    DateTime.Now.AddMonths(1),
+                    DateTime.Now.AddDays(2),
                     System.Web.Caching.Cache.NoSlidingExpiration
                 ); 
             }
