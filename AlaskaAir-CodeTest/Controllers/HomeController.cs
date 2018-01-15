@@ -17,13 +17,23 @@ namespace AlaskaAir_CodeTest.Controllers
         [HttpGet]
         public ActionResult AirportSearch(string searchTerm, int pageSize, int pageNum)
         {
-            Suggest sg = new Suggest(); 
+            var ca_o = HttpRuntime.Cache["airports-data"];
+            var sel_o = new Select2Result[] { new Select2Result { id = "", text = "none" } };
+
+            Suggest sg = new Suggest();
 
             Select2PagedResult aps_o = new Select2PagedResult
             {
                 Total = 1,
-                Results = sg.Airports(searchTerm)
+                Results = sel_o
             };
+
+            if (ca_o != null)
+            {
+                Airports[] all_airports = (Airports[])ca_o;
+
+                aps_o.Results = sg.Airports(searchTerm, all_airports);
+            }
 
             return new JsonResult
             {

@@ -13,14 +13,10 @@ namespace AlaskaAir_CodeTest.Services
       
         Airports[] all_airports;
 
-        public Select2Result[] Airports(string str)
+        public Select2Result[] Airports(string str, Airports[] src)
         {
-            var ca_o = HttpRuntime.Cache["airports-data"];
 
-            if (ca_o == null)
-                throw new Exception("airports data not found in cache");
-
-            all_airports = (Airports[])ca_o; 
+            all_airports = src; 
 
             Task[] tasks = new Task[2]; 
 
@@ -63,7 +59,7 @@ namespace AlaskaAir_CodeTest.Services
 
         private void searchNames(string str)
         {
-            str = str.Trim(); 
+            str = str.Trim().ToUpper(); 
 
             for (int i = 0; i < all_airports.Length; i++)
             {

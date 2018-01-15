@@ -181,6 +181,7 @@
 
             grid.pagerContainer.pagination({
                 dataSource: data,
+                pageSize: 20,
                 callback: function (data, pagination) {
                     // template method of yourself
                     var html = grid.templateProd(data);

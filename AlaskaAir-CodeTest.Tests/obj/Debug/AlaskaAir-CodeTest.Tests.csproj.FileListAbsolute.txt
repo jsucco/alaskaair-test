@@ -32,3 +32,13 @@ C:\aws\beanstock\AlaskaAir-CodeTest\AlaskaAir-CodeTest.Tests\bin\Debug\System.We
 C:\aws\beanstock\AlaskaAir-CodeTest\AlaskaAir-CodeTest.Tests\obj\Debug\AlaskaAir-CodeTest.Tests.csprojResolveAssemblyReference.cache
 C:\aws\beanstock\AlaskaAir-CodeTest\AlaskaAir-CodeTest.Tests\obj\Debug\AlaskaAir-CodeTest.Tests.dll
 C:\aws\beanstock\AlaskaAir-CodeTest\AlaskaAir-CodeTest.Tests\obj\Debug\AlaskaAir-CodeTest.Tests.pdb
+C:\aws\beanstock\AlaskaAir-CodeTest\AlaskaAir-CodeTest.Tests\bin\Debug\AlaskaAir-CodeTest.dll
+C:\aws\beanstock\AlaskaAir-CodeTest\AlaskaAir-CodeTest.Tests\bin\Debug\System.Web.Optimization.dll
+C:\aws\beanstock\AlaskaAir-CodeTest\AlaskaAir-CodeTest.Tests\bin\Debug\System.Web.Http.dll
+C:\aws\beanstock\AlaskaAir-CodeTest\AlaskaAir-CodeTest.Tests\bin\Debug\System.Web.Http.WebHost.dll
+C:\aws\beanstock\AlaskaAir-CodeTest\AlaskaAir-CodeTest.Tests\bin\Debug\System.Net.Http.Formatting.dll
+C:\aws\beanstock\AlaskaAir-CodeTest\AlaskaAir-CodeTest.Tests\bin\Debug\AlaskaAir-CodeTest.pdb
+C:\aws\beanstock\AlaskaAir-CodeTest\AlaskaAir-CodeTest.Tests\bin\Debug\System.Web.Optimization.xml
+C:\aws\beanstock\AlaskaAir-CodeTest\AlaskaAir-CodeTest.Tests\bin\Debug\System.Web.Http.xml
+C:\aws\beanstock\AlaskaAir-CodeTest\AlaskaAir-CodeTest.Tests\bin\Debug\System.Web.Http.WebHost.xml
+C:\aws\beanstock\AlaskaAir-CodeTest\AlaskaAir-CodeTest.Tests\bin\Debug\System.Net.Http.Formatting.xml
