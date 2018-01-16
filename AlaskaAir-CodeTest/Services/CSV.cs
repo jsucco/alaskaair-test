@@ -8,16 +8,14 @@ namespace AlaskaAir_CodeTest.Services
 {
     public class CSV : Parser
     {
-        public static List<string> ErrorList = new List<string>();
-        public static bool ErrorFlag = false;
+        public List<string> ErrorList = new List<string>();
+        public bool ErrorFlag = false;
 
-        private static string BasePath = HttpContext.Current.Server.MapPath("~");
+        
 
-        protected static Flights[] LoadFlights()
+        public Flights[] LoadFlights(string f_p)
         {
             List<Flights> list = new List<Flights>(); 
-
-            var f_p = BasePath + "flights.csv";
 
             if (File.Exists(f_p) == false)
                 throw new Exception("flights.csv file required at root of directory");                 
@@ -47,7 +45,7 @@ namespace AlaskaAir_CodeTest.Services
             return list.ToArray(); 
         }
 
-        private static Flights processFlight(string line)
+        private Flights processFlight(string line)
         {
             line = line.Trim(); 
 
@@ -80,11 +78,9 @@ namespace AlaskaAir_CodeTest.Services
             return null; 
         }
 
-        protected static Airports[] LoadAirports()
+        public Airports[] LoadAirports(string a_p)
         {
             List<Airports> list = new List<Airports>();
-
-            var a_p = BasePath + "airports.csv";
 
             if (File.Exists(a_p) == false)
                 throw new Exception("airports.csv file required at root of directory");
@@ -115,7 +111,7 @@ namespace AlaskaAir_CodeTest.Services
             return list.ToArray();
         }
 
-        private static Airports processAirport(string line)
+        private Airports processAirport(string line)
         {
             line = line.Trim(); 
 

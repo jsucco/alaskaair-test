@@ -90,6 +90,8 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="airports.csv" />
+    <None Include="flights.csv" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
